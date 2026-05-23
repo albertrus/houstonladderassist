@@ -124,12 +124,7 @@ async function handleSubmit(e) {
   const payload = buildPayload(form);
 
   try {
-    /*
-     * Replace 'YOUR_FORM_ID' with your actual Formspree endpoint.
-     * Sign up free at https://formspree.io to get a form ID.
-     * Alternatively, swap this fetch for EmailJS or a custom backend.
-     */
-    const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+    const res = await fetch('https://formspree.io/f/xvzyqrll', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify(payload),
@@ -142,11 +137,10 @@ async function handleSubmit(e) {
     }
   } catch (err) {
     console.error('Submission error:', err);
-    /*
-     * In production, replace this with a visible error message.
-     * Shown as success here so the form UI can be previewed locally.
-     */
-    showSuccess(form);
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = '<i class="fas fa-calendar-check"></i> Request Service';
+    const errorEl = document.getElementById('formError');
+    if (errorEl) { errorEl.hidden = false; errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
   }
 }
 
